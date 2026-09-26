@@ -1,9 +1,15 @@
 #!/usr/bin/env python3
-"""Install a per-user desktop entry pointing to this checkout."""
+"""Install a macOS app bundle or a Linux desktop entry for the current user."""
 import os
 from pathlib import Path
 import shutil
 import subprocess
+import sys
+
+if sys.platform == 'darwin':
+    subprocess.run([sys.executable, str(Path(__file__).resolve().parent / 'build-macos.py'),
+                    '--output', str(Path.home() / 'Applications/BlueTunes.app')], check=True)
+    sys.exit(0)
 
 root = Path(__file__).resolve().parent
 data = Path(os.environ.get('XDG_DATA_HOME', str(Path.home() / '.local/share')))

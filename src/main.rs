@@ -1,5 +1,6 @@
 mod artwork;
 mod browser;
+mod paths;
 mod settings;
 mod visualizer;
 use eframe::egui::{self, Color32, RichText};
@@ -133,17 +134,7 @@ fn clock(s: u64) -> String {
     format!("{}:{:02}", s / 60, s % 60)
 }
 fn state_path() -> PathBuf {
-    std::env::var_os("BLUETUNES_DATA_DIR")
-        .map(PathBuf::from)
-        .unwrap_or_else(|| {
-            std::env::var_os("XDG_DATA_HOME")
-                .map(PathBuf::from)
-                .unwrap_or_else(|| {
-                    PathBuf::from(std::env::var_os("HOME").unwrap_or_default()).join(".local/share")
-                })
-                .join("bluetunes")
-        })
-        .join("library.json")
+    paths::data_dir().join("library.json")
 }
 struct Player {
     library: Library,

@@ -1,10 +1,39 @@
 # BlueTunes
 
-A native Rust music player for Linux with a classic iTunes-style table, a navy-and-cyan interface, MP3/FLAC playback, playlists, album artwork, and audio-reactive visualizations.
+A native Rust music player for Linux and macOS with a classic iTunes-style table, a navy-and-cyan interface, MP3/FLAC playback, playlists, album artwork, and audio-reactive visualizations.
 
 An independent hobby project, not affiliated with Apple.
 
 ## Run
+
+### macOS
+
+Install Apple's Xcode command-line tools (`xcode-select --install`), a current
+stable Rust toolchain from [rustup.rs](https://rustup.rs), and Python 3. If you use
+full Xcode, open it once to complete setup and accept its license.
+
+Build a Finder-launchable application:
+
+```sh
+python3 build-macos.py
+open dist/BlueTunes.app
+```
+
+The builder creates an app for the current Mac's architecture (Apple Silicon or
+Intel), including the icon and an ad-hoc code signature. The app contains the
+compiled player: it does not need Rust, Python, or this checkout to run. Copy it
+to Applications, or build directly into your user Applications folder:
+
+```sh
+python3 install-launcher.py
+```
+
+You can also use `./run.sh` from Terminal. Audio uses CoreAudio and file dialogs
+use native macOS panels; ALSA, X11, Wayland, and desktop portals are not required.
+The bundle is intended for local use; public distribution would require Developer
+ID signing and notarization. It is not a universal binary.
+
+### Linux
 
 Install a current stable Rust toolchain, a C toolchain, pkg-config, and ALSA development libraries. A Wayland or X11 desktop with OpenGL and a working desktop portal is required.
 
@@ -38,7 +67,7 @@ Then open **BlueTunes** from your application menu. The launcher points to this 
 - Volume, shuffle, repeat, and the queue are restored on restart; playback does not start automatically.
 - Selecting a song shows its embedded cover, or a nearby cover.jpg/cover.png/folder.jpg/folder.png. Artwork loads in the background.
 
-Library metadata and playlists are saved to `$XDG_DATA_HOME/bluetunes/library.json` (normally `~/.local/share/bluetunes/library.json`). Audio files are referenced in place; they are never copied or edited. Set `BLUETUNES_DATA_DIR` to use a separate library for testing.
+Library metadata and playlists are saved to `~/Library/Application Support/BlueTunes/library.json` on macOS, or `$XDG_DATA_HOME/bluetunes/library.json` (normally `~/.local/share/bluetunes/library.json`) on Linux. Audio files are referenced in place; they are never copied or edited. Set `BLUETUNES_DATA_DIR` to use a separate library for testing. Linux library paths are not automatically remapped when moving music to a Mac; import the music from its new location.
 
 ## Build / test
 
@@ -55,7 +84,7 @@ The default test run covers filtering, playlists, drag-and-drop, settings, and v
 
 No tag editing, gapless playback, media-key integration, or automatic folder watching yet. Re-importing a folder skips existing paths. Moving source files requires importing their new location.
 
-Playback settings are stored beside the library in `settings.json`. Reinstall the desktop launcher after moving this project with `python3 install-launcher.py`.
+Playback settings are stored beside the library in `settings.json`. On Linux, reinstall the desktop launcher after moving this project with `python3 install-launcher.py`. The macOS app is independent of the checkout; rebuild it after source changes.
 
 ## Visualizer
 
