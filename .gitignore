@@ -1,0 +1,13 @@
+/target/
+/.tools/
+*.log
+/checkpoints/
+/CHECKPOINT.md
+__pycache__/
+*.pyc
+.env
+.env.*
+library.json
+settings.json
+*.mp3
+*.flac
