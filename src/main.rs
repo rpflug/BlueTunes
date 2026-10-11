@@ -1,3 +1,5 @@
+#![cfg_attr(all(target_os = "windows", not(debug_assertions)), windows_subsystem = "windows")]
+
 mod artwork;
 mod browser;
 mod paths;
@@ -995,6 +997,8 @@ fn main() -> eframe::Result {
         eframe::NativeOptions {
             viewport: egui::ViewportBuilder::default()
                 .with_app_id("com.bluetunes.Player")
+                .with_icon(eframe::icon_data::from_png_bytes(include_bytes!("../assets/bluetunes.png"))
+                    .expect("embedded BlueTunes icon must be valid"))
                 .with_inner_size([1280., 800.])
                 .with_min_inner_size([1000., 600.]),
             ..Default::default()

@@ -87,6 +87,9 @@ mod tests {
         };
         s.save(&p).unwrap();
         assert_eq!(Settings::load(&p).unwrap(), s);
+        let updated = Settings { volume: 0.8, ..s };
+        updated.save(&p).unwrap();
+        assert_eq!(Settings::load(&p).unwrap(), updated);
         fs::remove_file(p).unwrap();
     }
 }
