@@ -31,6 +31,18 @@ settings stay in `%LOCALAPPDATA%\BlueTunes`. To uninstall, delete the executable
 and any shortcuts; optionally delete that data folder to remove its settings.
 Your original music files are unaffected.
 
+To build from source on Windows, install stable Rust with the MSVC toolchain and
+Visual Studio Build Tools with **Desktop development with C++**, then run in PowerShell:
+
+```powershell
+.\build-windows.ps1
+```
+
+The builder writes a portable ZIP and SHA-256 checksum to `dist/`. The GitHub
+Windows workflow tests and builds the same package on pushes and pull requests.
+Pushing a `v` tag matching `Cargo.toml` creates a draft GitHub release containing
+the ZIP and checksum. Review the build and publish the draft to make it available.
+
 ### macOS
 
 Install Apple's Xcode command-line tools (`xcode-select --install`), a current
@@ -92,7 +104,7 @@ Then open **BlueTunes** from your application menu. The launcher points to this 
 - Volume, shuffle, repeat, and the queue are restored on restart; playback does not start automatically.
 - Selecting a song shows its embedded cover, or a nearby cover.jpg/cover.png/folder.jpg/folder.png. Artwork loads in the background.
 
-Library metadata and playlists are saved to `~/Library/Application Support/BlueTunes/library.json` on macOS, or `$XDG_DATA_HOME/bluetunes/library.json` (normally `~/.local/share/bluetunes/library.json`) on Linux. Audio files are referenced in place; they are never copied or edited. Set `BLUETUNES_DATA_DIR` to use a separate library for testing. Linux library paths are not automatically remapped when moving music to a Mac; import the music from its new location.
+Library metadata and playlists are saved to `%LOCALAPPDATA%\BlueTunes\library.json` on Windows, `~/Library/Application Support/BlueTunes/library.json` on macOS, or `$XDG_DATA_HOME/bluetunes/library.json` (normally `~/.local/share/bluetunes/library.json`) on Linux. Audio files are referenced in place; they are never copied or edited. Set `BLUETUNES_DATA_DIR` to use a separate library for testing. Library paths are not automatically remapped when moving music between computers; import the music from its new location.
 
 ## Build / test
 

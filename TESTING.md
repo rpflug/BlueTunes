@@ -56,3 +56,27 @@ macOS system libraries/frameworks. After enabling computer-control permissions,
 the main window rendering and opening and cancelling the native Add Files dialog
 were verified. Full GUI playback/import checks remain manual. Linux and Intel
 builds have not been run as part of this validation.
+
+## Windows 11
+
+GitHub Actions runs the default Rust suite on Windows and builds the portable ZIP
+using `build-windows.ps1`. Windows path tests cover LOCALAPPDATA, USERPROFILE fallback,
+and BLUETUNES_DATA_DIR. On Windows you can run the same suite with:
+
+```powershell
+cargo test --release --locked --target x86_64-pc-windows-msvc
+.\build-windows.ps1
+```
+
+Before publishing, manually smoke-test the extracted ZIP on Windows 11:
+
+- Launch from a folder containing spaces without Rust or Visual Studio installed;
+  verify the window and icon appear without a console window.
+- Import MP3/FLAC files with native file/folder dialogs and drag-and-drop.
+- Play, pause, seek, change volume, and switch visualizers.
+- Create and reorder a playlist; close and reopen twice to verify library and
+  settings overwrite correctly in `%LOCALAPPDATA%\BlueTunes`.
+- Move the extracted app and confirm that it still finds the saved library.
+
+CI does not replace a real Windows audio/graphics smoke test. The opt-in audio
+fixture tests remain excluded from the default CI suite.
