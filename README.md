@@ -6,18 +6,30 @@ An independent hobby project, not affiliated with Apple.
 
 ## Run
 
-### Windows 11
+### Windows 11 — download and install
 
-Download **BlueTunes-0.5.0-windows-x64.zip** from [GitHub Releases](https://github.com/rpflug/BlueTunes/releases), choose **Extract all**, then double-click **BlueTunes.exe**.
-No installation, administrator access, Rust, Python, or separate audio codecs are needed.
-This is an x64 build for Intel/AMD PCs, with the app icon and C runtime included.
-It requires an audio output device and an OpenGL 2.1-compatible graphics driver.
-The executable is unsigned, so Windows SmartScreen may show a warning; verify the
-release source and follow your organization's security policy.
+**[Download BlueTunes.exe](https://github.com/rpflug/BlueTunes/releases/download/v0.5.0/BlueTunes.exe)** (Windows 11, Intel/AMD x64 preview)
 
-To update, close the app and replace the executable. Your library and settings
-stay in `%LOCALAPPDATA%\BlueTunes`. To uninstall, delete the extracted app;
-optionally delete that data folder to remove its settings. Music files are unaffected.
+1. Download **BlueTunes.exe** using the link above.
+2. Move it from Downloads to a folder you want to keep, such as `Documents\BlueTunes`.
+3. Double-click **BlueTunes.exe** to start the app. There is no installer and no administrator access is required.
+4. Click **Add music folder** or **Add files** to import your MP3 and FLAC music.
+5. Optional: right-click the executable, choose **Show more options → Send to → Desktop (create shortcut)**.
+
+No Rust, Python, separate audio codecs, or Visual C++ runtime installation is needed.
+An audio output device and an OpenGL 2.1-compatible graphics driver are required.
+This first Windows build is a preview; real Windows 11 playback/graphics testing is still outstanding.
+The executable is unsigned, so Windows SmartScreen may show a warning. Check that
+the download came from this repository's release and follow your organization's security policy.
+
+You can also download the [ZIP package with instructions](https://github.com/rpflug/BlueTunes/releases/download/v0.5.0/BlueTunes-0.5.0-windows-x64.zip),
+choose **Extract all**, and open **BlueTunes.exe** from the extracted folder.
+The [release page](https://github.com/rpflug/BlueTunes/releases/tag/v0.5.0) includes SHA-256 checksums.
+
+To update, close the app and replace the executable. Your library, playlists, and
+settings stay in `%LOCALAPPDATA%\BlueTunes`. To uninstall, delete the executable
+and any shortcuts; optionally delete that data folder to remove its settings.
+Your original music files are unaffected.
 
 To build from source on Windows, install stable Rust with the MSVC toolchain and
 Visual Studio Build Tools with **Desktop development with C++**, then run in PowerShell:
