@@ -8,7 +8,7 @@ An independent hobby project, not affiliated with Apple.
 
 ### Windows 11
 
-Download **BlueTunes-0.5.0-windows-x64.zip** from [GitHub Releases](https://github.com/rpflug/BlueTunes/releases/latest), choose **Extract all**, then double-click **BlueTunes.exe**.
+Download **BlueTunes-0.5.0-windows-x64.zip** from [GitHub Releases](https://github.com/rpflug/BlueTunes/releases), choose **Extract all**, then double-click **BlueTunes.exe**.
 No installation, administrator access, Rust, Python, or separate audio codecs are needed.
 This is an x64 build for Intel/AMD PCs, with the app icon and C runtime included.
 It requires an audio output device and an OpenGL 2.1-compatible graphics driver.
